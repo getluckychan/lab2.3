@@ -1,17 +1,15 @@
-from main import Money
+from main import Money, Methods
 
 
 def main_func():
     first_value = Money()
-    first_value.read()
     second_value = Money()
+    first_value.read()
     second_value.read()
-    first_value.to_string()
-    second_value.to_string()
-    print(first_value.to_string() - second_value.to_string())
-    print(first_value.to_string() * 1.5)
-    first_value.compere(second_value.to_string())
-    first_value.increment()
-    first_value.decrement()
+    full = Methods()
+    return full.sub(first_value.to_string(), second_value.to_string()), full.mul(first_value.to_string()), \
+           full.compere(first_value.to_string(), second_value.to_string()), full.increment(first_value.to_string()), \
+           full.decrement(first_value.to_string())
 
-main_func()
+
+print(main_func())

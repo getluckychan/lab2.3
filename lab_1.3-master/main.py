@@ -1,57 +1,65 @@
 from __future__ import print_function
+from overload import Overloads
 
 
 class Money:
     def __init__(self):
-        self.__long = 1
-        self.__byte = 1
+        self.byte = None
+        self.long = None
 
     def set_nothing(self):
         pass
 
     def set_long(self, long):
-        self.__long = long
+        self.long = long
 
     def set_byte(self, byte):
-        self.__byte = byte
+        self.byte = byte
 
     def get_long(self):
-        return self.__long
+        return self.long
 
     def get_byte(self):
-        return self.__byte
-
-    def to_string(self):
-        value = float(str(self.__long) + "." + str(self.__byte))
-        return value
+        return self.byte
 
     def read(self):
         self.set_long(input("Введіть кількість гривень: "))
         self.set_byte(input("введіть кількість копійок: "))
 
-    def __sub__(self, other):
-        print(self.to_string() - other)
+    def to_string(self):
+        value = float(str(self.long) + "." + str(self.byte))
+        return value
 
-    def __mul__(self, other):
-        print(self.to_string() * other)
 
-    def compere(self, other):
-        if self.to_string() > other:
-            print("перше значення більше")
-        elif self.to_string() < other:
-            print("друге число більше")
+class Methods(Money):
+    def sub(self, first, second):
+        self.long = first
+        self.byte = second
+        return Overloads(self.long) - Overloads(self.byte)
+
+    def mul(self, first):
+        self.long = first
+        return Overloads(self.long) * Overloads(float(input("Введіть дробове число: ")))
+
+    def compere(self, first, second):
+        self.long = first
+        self.byte = second
+        if self.long > self.byte:
+            return "перше значення більше"
+        elif self.long < self.byte:
+            return "друге число більше"
         else:
-            print("вони рівні")
+            return "вони рівні"
 
-    def increment(self):
-        x = self.to_string()
+    def increment(self, first):
+        self.long = first
+        x = self.long
         x += 1
-        print(x)
+        return x
 
-    def decrement(self):
-        x = self.to_string()
+    def decrement(self, first):
+        self.long = first
+        x = self.long
         x -= 1
-        print(x)
+        return x
 
-    def __str__(self):
-        pass
